@@ -1,16 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { ParagraphTest } from './Components/Data.js';
+import { StyleSheet, View } from 'react-native';
+import { Menue } from './Components/ButtonMenue.js';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Button title="Datenbank anlegen"/>
-      <Button title="Datenbanken verwalten"/>
-      <Button title="Datenbanken löschen"/>
-      <Button title="Einstellungen"/>
-      <StatusBar style="auto" />
-      <ParagraphTest/>
+      <Menue/>
     </View>
   );
 }

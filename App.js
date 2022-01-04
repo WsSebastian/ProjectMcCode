@@ -1,23 +1,53 @@
-import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { CreateDatabase } from './Screens/CreateDatabase.js';
+import { Settings } from './Screens/Settings.js';
+import { EditDatabase } from './Screens/EditDatabase.js';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import * as Icon from '@expo/vector-icons';
+import { ColorPropType } from 'react-native';
+
+const Tab = createBottomTabNavigator();
+
+
 
 export default function App() {
+  
   return (
-    <View style={styles.container}>
-      <Button title="Datenbank anlegen"/>
-      <Button title="Datenbanken verwalten"/>
-      <Button title="Datenbanken löschen"/>
-      <Button title="Einstellungen"/>
-      <StatusBar style="auto" />
-    </View>
-  );
+  <NavigationContainer >
+    <Tab.Navigator>
+      <Tab.Screen
+      name="CreateDB" 
+      component={CreateDatabase}
+      options={{title:'Erstellen',
+      tabBarIcon: ({focused, size, color}) => 
+        <Icon.Ionicons 
+          name="create" 
+          size={size}
+          color={color}
+        />
+      }}
+      />
+      <Tab.Screen name="EditDB" component={EditDatabase}
+      options={{title:'Bearbeiten',
+      tabBarIcon: ({focused, size, color}) => 
+        <Icon.MaterialCommunityIcons 
+          name="qrcode-edit" 
+          size={size}
+          color={color}
+        />
+      }}
+      />
+      <Tab.Screen name="Settings" component={Settings}
+      options={{title:'Einstellungen',
+      tabBarIcon: ({focused, size, color}) => 
+        <Icon.Ionicons 
+          name="ios-settings-sharp" 
+          size={size}
+          color={color}
+        />
+      }}
+      />
+    </Tab.Navigator>
+  </NavigationContainer>);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#81DAF5',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

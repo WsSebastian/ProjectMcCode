@@ -1,20 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import { Menue } from './Components/ButtonMenue.js';
+import { CreateDatabase } from './Screens/CreateDatabase.js';
+import { Settings } from './Screens/Settings.js';
+import { EditDatabase } from './Screens/EditDatabase.js';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+
+const Tab = createBottomTabNavigator();
+
+
 
 export default function App() {
+  
   return (
-    <View style={styles.container}>
-      <Menue/>
-    </View>
-  );
+  <NavigationContainer >
+    <Tab.Navigator>
+      <Tab.Screen name="CreateDB" component={CreateDatabase}/>
+      <Tab.Screen name="EditDB" component={EditDatabase}/>
+      <Tab.Screen name="Settings" component={Settings}/>
+    </Tab.Navigator>
+  </NavigationContainer>);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#81DAF5',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

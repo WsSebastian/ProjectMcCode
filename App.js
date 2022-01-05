@@ -3,6 +3,9 @@ import { Settings } from './Screens/Settings.js';
 import { EditDatabase } from './Screens/EditDatabase.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { Scanner } from './Components/Scanner/Scanner';
+
 import * as Icon from '@expo/vector-icons';
 import { ColorPropType } from 'react-native';
 
@@ -52,6 +55,16 @@ export default function App() {
       />
       <Tab.Screen name="Settings" component={Settings}
       options={{title:'Einstellungen'
+      }}
+      />
+      <Tab.Screen name="ScannerButton" component={Scanner}
+      options={{title:'Scan',
+        tabBarIcon: ({focused, size, color}) =>
+          <Icon.Ionicons
+            name="ios-settings-sharp"
+            size={size}
+            color={color}
+          />
       }}
       />
     </Tab.Navigator>

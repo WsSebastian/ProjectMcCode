@@ -14,37 +14,44 @@ export default function App() {
   
   return (
   <NavigationContainer >
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={({route}) => {
+        return{
+          tabBarIcon: ({focused, size, color}) =>{
+            let icon;
+          
+            if(route.name === 'CreateDB')
+              icon = focused ? 'add-circle' : 'add-circle-outline';
+            else if (route.name === 'EditDB')
+              icon = focused ? 'construct' : 'construct-outline';
+            else if (route.name === 'Settings')
+              icon = focused ? 'ellipsis-vertical' : 'ellipsis-vertical-outline';
+            return(
+              <Icon.Ionicons
+                name={icon}
+                size={size}
+                color={color}
+              />
+            )
+          }
+        }
+      }}
+      tabBarOptions={{
+        activeTintColor: 'green'
+      }}
+      >
       <Tab.Screen
       name="CreateDB" 
       component={CreateDatabase}
-      options={{title:'Erstellen',
-      tabBarIcon: ({focused, size, color}) => 
-        <Icon.Ionicons 
-          name="create" 
-          size={size}
-          color={color}
-        />
+      options={{title:'Erstellen'
       }}
       />
       <Tab.Screen name="EditDB" component={EditDatabase}
-      options={{title:'Bearbeiten',
-      tabBarIcon: ({focused, size, color}) => 
-        <Icon.MaterialCommunityIcons 
-          name="qrcode-edit" 
-          size={size}
-          color={color}
-        />
+      options={{title:'Bearbeiten'
       }}
       />
       <Tab.Screen name="Settings" component={Settings}
-      options={{title:'Einstellungen',
-      tabBarIcon: ({focused, size, color}) => 
-        <Icon.Ionicons 
-          name="ios-settings-sharp" 
-          size={size}
-          color={color}
-        />
+      options={{title:'Einstellungen'
       }}
       />
     </Tab.Navigator>

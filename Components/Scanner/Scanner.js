@@ -6,6 +6,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 export function Scanner() {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
+    const [text, setText] = useState('Not yet scanned')
 
     useEffect(() => {
         (async () => {
@@ -14,45 +15,46 @@ export function Scanner() {
         })();
     }, []);
 
-    const handleBarCodeScanned = ({ type, data }) => {
+    const handleScannedCode = ({ type, data }) => {
         setScanned(true);
         alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     };
-
-    if (hasPermission === null) {
-        return <Text>Requesting for camera permission</Text>;
-    }
     if (hasPermission === false) {
-        return <Text>No access to camera</Text>;
+        return <Text>Camera: Access denied</Text>;
     }
     return (
         <View style={styles.container}>
-            <BarCodeScanner
-                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-                style={StyleSheet.absoluteFillObject}
-            />
-            {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+            <View style={styles.barcodebox}>
+                <BarCodeScanner
+                    onBarCodeScanned={scanned ? undefined : handleScannedCode}
+                    style={{ height: 400, width: 400 }} />
+            </View>
+            <Text style={styles.maintext}>{text}</Text>
+
+            {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    centerText: {
+    container: {
         flex: 1,
-        fontSize: 18,
-        padding: 32,
-        color: '#777'
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    textBold: {
-        fontWeight: '500',
-        color: '#000'
+    maintext: {
+        fontSize: 16,
+        margin: 20,
     },
-    buttonText: {
-        fontSize: 21,
-        color: 'rgb(0,122,255)'
-    },
-    buttonTouchable: {
-        padding: 16
+    barcodebox: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 300,
+        width: 300,
+        overflow: 'hidden',
+        borderRadius: 30,
+        backgroundColor: 'tomato'
     }
 });
 

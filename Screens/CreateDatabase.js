@@ -12,7 +12,7 @@ export function CreateDatabase() {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#81DAF5',
+      backgroundColor: '#7FB285',
       alignItems: 'center',
       justifyContent: 'center',
     },

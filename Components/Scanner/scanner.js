@@ -31,7 +31,7 @@ export function Scanner() {
             </View>
             <Text style={styles.maintext}>{text}</Text>
 
-            {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
+            {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='#D16014' />}
         </View>
     );
 }

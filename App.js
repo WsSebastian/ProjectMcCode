@@ -4,8 +4,10 @@ import { EditDatabase } from './Screens/EditDatabase.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+
 import { Scanner } from './Components/Scanner/Scanner';
 import { AddEntry } from './Components/AddEntry';
+import { ContentsPage } from "./Components/ContentsPage";
 
 import * as Icon from '@expo/vector-icons';
 import { ColorPropType } from 'react-native';
@@ -50,8 +52,8 @@ export default function App() {
       options={{title:'Erstellen'
       }}
       />
-      <Tab.Screen name="EditDB" component={EditDatabase}
-      options={{title:'Bearbeiten'
+      <Tab.Screen name="Overview" component={ContentsPage}
+      options={{title:'Übersicht'
       }}
       />
       <Tab.Screen name="Settings" component={Settings}

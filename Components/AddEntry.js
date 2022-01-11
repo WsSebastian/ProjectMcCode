@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet } from "react-native";
 import './Form.css';
+import Firebase from "./Firebase";
 
 export function AddEntry() {
     const [text, setText] = useState();
 
-    function setEntry(entry){
-        //Add Entry to Database
+    const saveEntry = async(e) => {
+
+        await Firebase.content.add({
+            text: text
+        })
+
+        setText('')
     }
 
     //Benötigt:
@@ -20,7 +26,7 @@ export function AddEntry() {
     return(
         <View style={styles.container}>
             <div className="form">
-            <form onSubmit={setEntry}>
+            <form onSubmit={saveEntry}>
                 <label>
                     Name:
                     <input placeholder="Name" type="text" value={text}/>

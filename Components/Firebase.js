@@ -1,5 +1,7 @@
-import firebase from 'firebase';
-import 'firebase/firestore';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 const config ={
     apiKey: "AIzaSyDs855GrQZb_jGGyxhrykmZP2QMTKJlO10",
@@ -12,12 +14,25 @@ const config ={
 
 export default class Firebase{
     static db;
+    static content;
 
     static init(){
     if(firebase.apps.length === 0){
         firebase.initializeApp(config);
     }
+
     Firebase.db = firebase.firestore();
+    Firebase.content = Firebase.db.collection('test');
     
     }
+
+
+    static getContents(){
+        //const content = db.collection('test');
+        const query = Firebase.content.get();
+
+        const [collection] = useCollectionData(query);
+        return collection
+    }
+
 }

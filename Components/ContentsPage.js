@@ -30,10 +30,10 @@ export function ContentsPage(){
 
     const [blogs,setBlogs]=useState([])
     const fetchBlogs=async()=>{
-        const response=db.collection('test');
+        const response=db.collection('ordner').doc('ordner1').collection('inhalt');
         const data=await response.get();
         data.docs.forEach(item=>{
-            setBlogs([...blogs,item.data()])
+            setBlogs([blogs,item.data()])
         })
     }
     useEffect(() => {
@@ -44,10 +44,11 @@ export function ContentsPage(){
             {
                 blogs && blogs.map(blog=>{
                     return(
-                        <div className="blog-container">
-                            <h4>{blog.name}</h4>
-                            <p>{blog.test}</p>
-                        </div>
+                        <li key={blog.title} className="blog-container">
+                            <h4>{blog.title}</h4>
+                            <p>{blog.description}</p>
+                            <p>{blog.category}</p>
+                        </li>
                     )
                 })
             }

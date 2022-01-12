@@ -15,6 +15,7 @@ const config ={
 export default class Firebase{
     static db;
     static content;
+    static data;
 
     static init(){
     if(firebase.apps.length === 0){
@@ -29,10 +30,15 @@ export default class Firebase{
 
     static getContents(){
         //const content = db.collection('test');
-        const query = Firebase.content.get();
+        //const query = Firebase.content.
+        Firebase.db.collection('test').onSnapshot((snapshot) => {
+            const query = [];
+            snapshot.forEach((doc) => query.push({...doc.data(), id: doc.id}));
+            Firebase.data = query;
+        });
 
-        const [collection] = useCollectionData(query);
-        return collection
+        //const [collection] = useCollectionData(query);
+        return Firebase.data
     }
 
 }

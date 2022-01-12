@@ -8,13 +8,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Scanner } from './Components/Scanner/Scanner';
 import { AddEntry } from './Components/AddEntry';
 import { ContentsPage } from "./Components/ContentsPage";
+import { Overview } from "./Components/Overview";
+import { StartPage } from "./Components/StartPage";
 
 import * as Icon from '@expo/vector-icons';
 import { ColorPropType } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
-
+//Start Page Navigation zu -> Overview, AddEntry, Scanner
 
 export default function App() {
   
@@ -47,17 +49,17 @@ export default function App() {
       }}
       >
       <Tab.Screen
-      name="CreateDB" 
-      component={CreateDatabase}
-      options={{title:'Erstellen'
+      name="StartPage"
+      component={StartPage}
+      options={{title:'Home'
       }}
       />
-      <Tab.Screen name="Overview" component={ContentsPage}
+      <Tab.Screen name="Overview" component={Overview}
       options={{title:'Übersicht'
       }}
       />
-      <Tab.Screen name="Settings" component={Settings}
-      options={{title:'Einstellungen'
+      <Tab.Screen name="ContentTest" component={ContentsPage}
+      options={{title:'ContentTest'
       }}
       />
       <Tab.Screen name="ScannerButton" component={Scanner}

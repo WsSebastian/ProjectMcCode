@@ -3,12 +3,14 @@ import { Text, View, StyleSheet } from "react-native";
 import './Form.css';
 import Firebase from "./Firebase";
 
+import db from "./firebase.config";
+
 export function AddEntry() {
     const [text, setText] = useState();
 
     const saveEntry = async(e) => {
 
-        await Firebase.content.add({
+        await db.add({
             text: text
         })
 

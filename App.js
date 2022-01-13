@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 import { Scanner } from './Components/Scanner/Scanner';
-import { AddEntry } from './Components/AddEntry';
+import AddEntry from './Components/AddEntry';
 import { ContentsPage } from "./Components/ContentsPage";
 import { Overview } from "./Components/Overview";
 import { StartPage } from "./Components/StartPage";

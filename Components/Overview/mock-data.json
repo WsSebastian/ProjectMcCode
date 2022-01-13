@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Bücher"
+  },
+  {
+    "id": 2,
+    "name": "Spiele"
+  },
+  {
+    "id": 3,
+    "name": "CD"
+  }
+]

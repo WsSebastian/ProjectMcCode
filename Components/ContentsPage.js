@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Firebase from './Firebase'
 import { Text, View, StyleSheet } from "react-native";
 import db from './firebase.config';
+import 'firebase/compat/firestore';
+
 /*
 export function ContentsPage(){
 

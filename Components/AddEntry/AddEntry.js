@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet } from "react-native";
-import './Form.css';
-import Firebase from "./Firebase";
+//import './Form.css';
+import Firebase from "../Database/Firebase";
 
-import db from "./firebase.config";
+import db from "../Database/firebase.config";
 
 
 class AddEntry extends React.Component{

@@ -1,15 +1,12 @@
-import { CreateDatabase } from './Screens/CreateDatabase.js';
-import { Settings } from './Screens/Settings.js';
-import { EditDatabase } from './Screens/EditDatabase.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 import { Scanner } from './Components/Scanner/scanner';
-import AddEntry from './Components/AddEntry';
-import { ContentsPage } from "./Components/ContentsPage";
-import { Overview } from "./Components/Overview";
-import { StartPage } from "./Components/StartPage";
+import AddEntry from './Components/AddEntry/AddEntry';
+import { ContentsPage } from "./Components/Overview/ContentsPage";
+import { Overview } from "./Components/Overview/Overview";
+import { StartPage } from "./Components/StartPage/StartPage";
 
 import * as Icon from '@expo/vector-icons';
 import { ColorPropType } from 'react-native';

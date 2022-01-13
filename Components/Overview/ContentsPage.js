@@ -1,31 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Firebase from './Firebase'
+import Firebase from '../Database/Firebase'
 import { Text, View, StyleSheet } from "react-native";
-import db from './firebase.config';
-/*
-export function ContentsPage(){
+import db from '../Database/firebase.config';
 
-    const currentCollection = Firebase.getContents();
-
-    function ColContent(props){
-        const text = props.currentCollection;
-
-        return (
-            <div className={'test'}>
-            <p>{text}</p>
-            </div>
-        )
-    }
-
-    return(
-        <View>
-            <div>
-                {currentCollection && currentCollection.map(cont => <ColContent key={cont.id} currentCollection={cont}/>)}
-            </div>
-
-        </View>
-    )
-}*/
 export function ContentsPage(){
 
     /*
@@ -53,19 +30,19 @@ export function ContentsPage(){
     }, []);
 
     return (
-        <div className="App">
+        <View className="App">
             {
-                contents && contents.map(blog=>{
+                contents && contents.map(content=>{
                     return(
-                        <li key={blog.title} className="contents-container">
-                            <h4>{blog.title}</h4>
-                            <p>{blog.description}</p>
-                            <p>{blog.category}</p>
-                        </li>
+                        <Text key={content.title} className="contents-container">
+                            <Text>{content.title}</Text>
+                            <Text>{content.description}</Text>
+                            <Text>{content.category}</Text>
+                        </Text>
                     )
                 })
             }
-        </div>
+        </View>
     );
 
 }

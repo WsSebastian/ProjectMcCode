@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, TextInput, Button,  } from "react-native";
+import RNPickerSelect from 'react-native-picker-select';
 //import './Form.css';
 import Firebase from "../Database/Firebase";
 
 import db from "../Database/firebase.config";
+import {TouchableOpacity} from "react-native-web";
 
 /*
 class AddEntry extends React.Component{
@@ -110,35 +112,50 @@ export default AddEntry;
 export function AddEntry(props) {
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
-    const [category, setCategory] = useState();
+    const [category, setCategory] = useState("Buch");
 
     const [folders, setFolders] = useState([]);
-    const [folder, setFolder] = useState(props.folder);
+    const [folder, setFolder] = useState({
+        label: props.folder,
+        value: props.folder
+    });
 
     useEffect(() => {
         return db.collection('ordner').onSnapshot((snapshot) => {
             const postData = [];
-            snapshot.forEach((doc) => postData.push({ ...doc.data(), id: doc.id }));
-            console.log(postData);  // <------
-            setFolders(postData);
+            snapshot.forEach((folder) => postData.push({ ...folder.data(), id: folder.id }));
+            console.log(postData);
+
+            postData.forEach((folder) => setFolders([...folders, {
+                label: folder.id,
+                value: folder.id
+            }]))
         });
     }, []);
 
 
-    const handleChange = (event) => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
+    const handleChangeTitle = (event) => {
+        setTitle(event.target.value);
     }
+    const handleChangeDescription = (event) => {
+        setDescription(event.target.value);
+    }
+    /*
+    const handleChangeFolder = (event) => {
+        setFolder(event.target.value);
+    }
+    const handleChangeCategory = (event) => {
+        setCategory(event.target.value);
+    }*/
 
-    function saveEntry(event) {
+    function saveEntry() {
 
-        event.preventDefault();
-        db.collection('ordner').doc(event.target.folder.value).collection("inhalt").add({
-            title: event.target.title.value,
-            description: event.target.description.value,
-            category: event.target.category.value
+        console.log(title, description, category, folder)
+        //event.preventDefault();
+        db.collection('ordner').doc(folder).collection("inhalt").add({
+            title: title,
+            description: description,
+            category: category
         }).then(() => {
             console.log('Item added!');
         })
@@ -155,44 +172,53 @@ export function AddEntry(props) {
     //...
     return(
         <View>
-            <div className="form">
-                <form onSubmit={saveEntry}>
-                    <label>
-                        Name:
-                        <input name="title" placeholder="Name" type="title" value={title} onChange={handleChange}/>
-                    </label>
-                    <br />
-                    <label>
-                        Ordner:
-                        <select name="folder" size="1" value={folder} onChange={handleChange}>
-                            {
-                                folders.map( (item) =>
-                                    <option key={item.id} value={item.id}>{item.id}</option>)
-                            }
-                        </select>
-                    </label>
-                    <br />
-                    <label>
-                        Beschreibung:
-                        <input name="description" placeholder="Beschreibung" type="description" value={description} onChange={handleChange}/>
-                    </label>
-                    <br />
-                    <label>
-                        Kategorie:
-                        <select name="category" size="1" value={category} onChange={handleChange}>
-                            <option>Buch</option>
-                            <option>Karte</option>
-                            <option>Dings</option>
-                            <option>Bla</option>
-                            <option>Test</option>
-                        </select>
-                    </label>
-                    <br />
-                    <input type="file" />
-                    <br />
-                    <input type="submit" value="Absenden"/>
-                </form>
-            </div>
+            <View className="form">
+                <Text>
+                    Name:
+                    {'\n'}
+                    <TextInput style={{width: '100%'}} placeholder="Name" onChange={handleChangeTitle}/>
+                    {'\n'}
+                </Text>
+                <Text>
+                    Ordner:
+                    {'\n'}
+                    <RNPickerSelect value={folder} onValueChange={currentFolder => setFolder(currentFolder)} items={folders}/>
+                    {'\n'}
+                </Text>
+                <Text>
+                    Beschreibung:
+                    {'\n'}
+                    <TextInput style={{width: '100%'}} placeholder="Beschreibung" onChange={handleChangeDescription}/>
+                    {'\n'}
+                </Text>
+                <Text>
+                    Kategorie:
+
+                </Text>
+                <Button title="Absenden" onPress={saveEntry}/>
+            </View>
         </View>
     );
 }
+
+/*
+
+<Picker name="category" size="1" value={category} onChange={handleChangeCategory}>
+                        <Picker.item>Buch</Picker.item>
+                        <Picker.item>Karte</Picker.item>
+                        <Picker.item>Dings</Picker.item>
+                        <Picker.item>Bla</Picker.item>
+                        <Picker.item>Test</Picker.item>
+                    </Picker>
+
+                    <Picker selectedValue={folder} onValueChange={currentFolder => setFolder(currentFolder)}>
+                        {
+                            folders.map( (item) =>
+                                <Picker.item label={item.id} value={item.id}/>)
+                        }
+                    </Picker>
+
+                    folders.map( (item) =>
+                                <Picker.item label={item.id} value={item.id}/>)
+
+ */

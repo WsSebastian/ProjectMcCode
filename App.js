@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
-import { Scanner } from './Components/Scanner/scanner';
+import { Scanner } from './Components/Scanner/Scanner';
 import { AddEntry } from './Components/AddEntry/AddEntry';
 import { ContentsPage } from "./Components/Overview/ContentsPage";
 import { Overview } from "./Components/Overview/Overview";

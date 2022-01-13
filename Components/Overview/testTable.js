@@ -27,7 +27,7 @@ const DatabaseTable = () =>{
 
         const newDatabase = {
             id: nanoid(),
-            name: addFormData.name
+            name: e.target.value
         }
         const newDatabases = [...databases, newDatabase];
         setDatabases(newDatabases);

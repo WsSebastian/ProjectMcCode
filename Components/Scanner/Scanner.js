@@ -17,6 +17,15 @@ export function Scanner() {
 
     const handleScannedCode = ({ type, data }) => {
         setScanned(true);
+        //wenn unser QR-Code
+        if(data.includes("ordner.")){
+            //Aufrufen von entsprechender ContentsPage
+            //window.location.href = '../Overview/ContentsPage.js';
+            navigator.navigate('../Overview/ContentsPage.js', {
+                folder: (data.split(".").pop())
+            })
+
+        }
         alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     };
     if (hasPermission === false) {

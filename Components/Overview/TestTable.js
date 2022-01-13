@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+/*import React, { useState } from "react";
 //import "./testTable.css";
 import data from "./mock-data.json"
 import {nanoid} from "nanoid";
@@ -35,7 +35,7 @@ const DatabaseTable = () =>{
 
     
 
-    return <div className="database-container">
+    return (<div className="database-container">
         <table>
             <thead>
                 <tr>
@@ -64,7 +64,7 @@ const DatabaseTable = () =>{
                 Datenbank anlegen.
             </button>
         </form>
-    </div>
+    </div>)
 };
 
-export default DatabaseTable;
+export default DatabaseTable;*/

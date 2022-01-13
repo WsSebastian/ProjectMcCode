@@ -28,6 +28,7 @@ export function ContentsPage(){
 }*/
 export function ContentsPage(){
 
+    /*
     const [blogs,setBlogs]=useState([])
     const fetchBlogs=async()=>{
         const response=db.collection('ordner').doc('ordner1').collection('inhalt');
@@ -38,13 +39,25 @@ export function ContentsPage(){
     }
     useEffect(() => {
         fetchBlogs();
-    }, [])
+    }, [])*/
+
+    const [contents, setContents] = useState([]);
+
+    useEffect(() => {
+        return db.collection('ordner').doc('ordner1').collection('inhalt').onSnapshot((snapshot) => {
+            const postData = [];
+            snapshot.forEach((doc) => postData.push({ ...doc.data(), id: doc.id }));
+            console.log(postData);  // <------
+            setContents(postData);
+        });
+    }, []);
+
     return (
         <div className="App">
             {
-                blogs && blogs.map(blog=>{
+                contents && contents.map(blog=>{
                     return(
-                        <li key={blog.title} className="blog-container">
+                        <li key={blog.title} className="contents-container">
                             <h4>{blog.title}</h4>
                             <p>{blog.description}</p>
                             <p>{blog.category}</p>

@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 import { Scanner } from './Components/Scanner/scanner';
-import AddEntry from './Components/AddEntry/AddEntry';
+import { AddEntry } from './Components/AddEntry/AddEntry';
 import { ContentsPage } from "./Components/Overview/ContentsPage";
 import { Overview } from "./Components/Overview/Overview";
 import { StartPage } from "./Components/StartPage/StartPage";
@@ -55,7 +55,7 @@ export default function App() {
       options={{title:'Übersicht'
       }}
       />
-      <Tab.Screen name="ContentTest" component={ContentsPage}
+      <Tab.Screen name="ContentTest" children={()=><ContentsPage folder={"ordner1"}/>}
       options={{title:'ContentTest'
       }}
       />

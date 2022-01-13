@@ -5,18 +5,33 @@ import Firebase from "../Database/Firebase";
 
 import db from "../Database/firebase.config";
 
-
+/*
 class AddEntry extends React.Component{
-    constructor(props) {
+    constructor(props, folder = 'ordner1') {
         super(props);
 
         this.state = {
             title: '',
             description: '',
-            category: ''
+            category: '',
+            folder: folder
         };
-
+        //this.getFolders = this.getFolders.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.folders = [];
+        this.getFolders();
+    }
+
+
+    getFolders = async() => {
+
+         await db.collection('ordner').onSnapshot((snapshot) => {
+            const postData = [];
+            snapshot.forEach((doc) => postData.push({ ...doc.data(), id: doc.id }));
+            console.log(postData);  // <------
+            this.folders.push(postData);
+        }, []);
+
     }
 
     handleChange(event){
@@ -35,7 +50,7 @@ class AddEntry extends React.Component{
     saveEntry(event) {
 
         event.preventDefault();
-        db.collection('ordner').doc("ordner1").collection("inhalt").add({
+        db.collection('ordner').doc(event.target.folder.value).collection("inhalt").add({
             title: event.target.title.value,
             description: event.target.description.value,
             category: event.target.category.value
@@ -52,6 +67,16 @@ class AddEntry extends React.Component{
                         <label>
                             Name:
                             <input name="title" placeholder="Name" type="title" value={this.state.title} onChange={this.handleChange}/>
+                        </label>
+                        <br />
+                        <label>
+                            Ordner:
+                            <select name="folder" size="1" value={this.state.folder} onChange={this.handleChange}>
+                                {
+                                    this.folders.map( (item) =>
+                                    <option key={item.id} value={item.id}>{item.id}</option>)
+                                }
+                            </select>
                         </label>
                         <br />
                         <label>
@@ -80,30 +105,45 @@ class AddEntry extends React.Component{
     }
 }
 export default AddEntry;
+*/
 
-/*
-export function AddEntry() {
-    const [textName, setTextName] = useState();
+export function AddEntry(props) {
+    const [title, setTitle] = useState();
     const [description, setDescription] = useState();
     const [category, setCategory] = useState();
 
+    const [folders, setFolders] = useState([]);
+    const [folder, setFolder] = useState(props.folder);
+
+    useEffect(() => {
+        return db.collection('ordner').onSnapshot((snapshot) => {
+            const postData = [];
+            snapshot.forEach((doc) => postData.push({ ...doc.data(), id: doc.id }));
+            console.log(postData);  // <------
+            setFolders(postData);
+        });
+    }, []);
 
 
     const handleChange = (event) => {
-        setTextName(event.target.value)
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
     }
 
-    function saveEntry() {
+    function saveEntry(event) {
 
-        db.collection('regal1').add({
-            name: textName,
-            category: category
+        event.preventDefault();
+        db.collection('ordner').doc(event.target.folder.value).collection("inhalt").add({
+            title: event.target.title.value,
+            description: event.target.description.value,
+            category: event.target.category.value
         }).then(() => {
             console.log('Item added!');
         })
-
-
     }
+
 
     //Benötigt:
     //Name
@@ -114,44 +154,45 @@ export function AddEntry() {
     //BarCode Scannen / ...
     //...
     return(
-        <View style={styles.container}>
+        <View>
             <div className="form">
-            <form onSubmit={saveEntry}>
-                <label>
-                    Name:
-                    <input name="name" placeholder="Name" type="text" value={textName} onChange={handleChange}/>
-                </label>
-                <br />
-                <label>
-                    Beschreibung:
-                    <input name="description" placeholder="Beschreibung" type="text" value={description}/>
-                </label>
-                <br />
-                <label>
-                    Kategorie:
-                    <select name="category" size="1" value={category}>
-                        <option>Buch</option>
-                        <option>Karte</option>
-                        <option>Dings</option>
-                        <option>Bla</option>
-                        <option>Test</option>
-                    </select>
-                </label>
-                <br />
-                <input type="file" />
-                <br />
-                <input type="submit" value="Absenden"/>
-            </form>
+                <form onSubmit={saveEntry}>
+                    <label>
+                        Name:
+                        <input name="title" placeholder="Name" type="title" value={title} onChange={handleChange}/>
+                    </label>
+                    <br />
+                    <label>
+                        Ordner:
+                        <select name="folder" size="1" value={folder} onChange={handleChange}>
+                            {
+                                folders.map( (item) =>
+                                    <option key={item.id} value={item.id}>{item.id}</option>)
+                            }
+                        </select>
+                    </label>
+                    <br />
+                    <label>
+                        Beschreibung:
+                        <input name="description" placeholder="Beschreibung" type="description" value={description} onChange={handleChange}/>
+                    </label>
+                    <br />
+                    <label>
+                        Kategorie:
+                        <select name="category" size="1" value={category} onChange={handleChange}>
+                            <option>Buch</option>
+                            <option>Karte</option>
+                            <option>Dings</option>
+                            <option>Bla</option>
+                            <option>Test</option>
+                        </select>
+                    </label>
+                    <br />
+                    <input type="file" />
+                    <br />
+                    <input type="submit" value="Absenden"/>
+                </form>
             </div>
         </View>
     );
 }
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#7FB285',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
-});
-*/

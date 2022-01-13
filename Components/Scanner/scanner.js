@@ -17,6 +17,12 @@ export function Scanner() {
 
     const handleScannedCode = ({ type, data }) => {
         setScanned(true);
+        //wenn unser QR-Code direkt
+
+        //if(data.)
+
+
+
         alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     };
     if (hasPermission === false) {

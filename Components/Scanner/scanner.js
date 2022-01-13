@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { NavigationContainer } from '@react-navigation/native';
 
 
 export function Scanner() {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
     const [text, setText] = useState('Not yet scanned')
+
 
     useEffect(() => {
         (async () => {
@@ -17,12 +19,15 @@ export function Scanner() {
 
     const handleScannedCode = ({ type, data }) => {
         setScanned(true);
-        //wenn unser QR-Code direkt
+        //wenn unser QR-Code
+        if(data.includes("ordner.")){
+            //Aufrufen von entsprechender ContentsPage
+            //window.location.href = '../Overview/ContentsPage.js';
+            navigator.navigate('../Overview/ContentsPage.js', {
+                folder: (data.split(".").pop())
+            })
 
-        //if(data.)
-
-
-
+        }
         alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     };
     if (hasPermission === false) {

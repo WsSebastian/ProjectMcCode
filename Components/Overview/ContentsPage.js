@@ -3,7 +3,7 @@ import Firebase from '../Database/Firebase'
 import { Text, View, StyleSheet } from "react-native";
 import db from '../Database/firebase.config';
 
-export function ContentsPage(){
+export function ContentsPage(props){
 
     /*
     const [blogs,setBlogs]=useState([])
@@ -21,7 +21,7 @@ export function ContentsPage(){
     const [contents, setContents] = useState([]);
 
     useEffect(() => {
-        return db.collection('ordner').doc('ordner1').collection('inhalt').onSnapshot((snapshot) => {
+        return db.collection('ordner').doc(props.folder).collection('inhalt').onSnapshot((snapshot) => {
             const postData = [];
             snapshot.forEach((doc) => postData.push({ ...doc.data(), id: doc.id }));
             console.log(postData);  // <------

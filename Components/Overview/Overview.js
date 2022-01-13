@@ -2,17 +2,12 @@ import React, { useState, useEffect } from 'react';
 //import TestTable from './TestTable.js';
 import { Text, View, StyleSheet, TextInput, Button,  } from "react-native";
 import db from "../Database/firebase.config";
-import { NavigationContainer} from "@react-navigation/native";
-import {ContentsPage} from "./ContentsPage";
 
 //page containing Overview over Structure
-export function Overview({navigation}){
+export function Overview(){
 
     const [folders, setFolders] = useState([]);
     const [folder, setFolder] = useState();
-    const nav = StackNavigator({
-        ContentsPage: {screen: ContentsPage}
-    })
 
     useEffect(() => {
         return db.collection('ordner').onSnapshot((snapshot) => {

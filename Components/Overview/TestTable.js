@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./testTable.css";
+//import "./testTable.css";
 import data from "./mock-data.json"
 import {nanoid} from "nanoid";
 

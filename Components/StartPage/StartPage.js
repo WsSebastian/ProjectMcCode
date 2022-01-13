@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet } from "react-native";
-import TestTable from '../Overview/testTable';
+import TestTable from '../Overview/TestTable';
 
 export function StartPage() {
     return (

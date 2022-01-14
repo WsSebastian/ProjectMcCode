@@ -173,8 +173,8 @@ export function AddEntry(props) {
     //BarCode Scannen / ...
     //...
     return(
-        <View>
-            <View className="form">
+        <View style={styles.container}>
+            <View className="form" style={styles.container}>
                 <Text>
                     Name:
                     {'\n'}
@@ -198,6 +198,34 @@ export function AddEntry(props) {
         </View>
     );
 }
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#7FB285',
+    },
+    textButton: {
+        backgroundColor: '#6FA265',
+        textAlign: 'center',
+        color: '#F4F4F8'
+    },
+    textInput: {
+        backgroundColor: '#6FA265',
+        textAlign: 'center',
+        color: '#F4F4F8',
+    },
+    text: {
+        textAlign: 'center',
+        fontSize: 25,
+        fontWeight: "bold",
+        lineHeight: 100
+    },
+    header: {
+        backgroundColor: '#363732'
+    }
+
+});
 
 /*
 

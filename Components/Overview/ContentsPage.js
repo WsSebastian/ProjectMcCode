@@ -31,7 +31,7 @@ export function ContentsPage({route, navigation}){
     }, []);
 
     return (
-        <View className="App">
+        <View className="App" style={styles.container}>
             {
                 contents && contents.map(content=>{
                     return(
@@ -46,3 +46,30 @@ export function ContentsPage({route, navigation}){
     );
 
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#7FB285',
+    },
+    textButton: {
+        backgroundColor: '#6FA265',
+        textAlign: 'center',
+        color: '#F4F4F8'
+    },
+    textInput: {
+        backgroundColor: '#6FA265',
+        textAlign: 'center',
+        color: '#F4F4F8',
+    },
+    text: {
+        textAlign: 'center',
+        fontSize: 25,
+        fontWeight: "bold",
+        lineHeight: 100
+    },
+    header: {
+        backgroundColor: '#363732'
+    }
+
+});

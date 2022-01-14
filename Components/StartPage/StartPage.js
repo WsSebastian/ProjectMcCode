@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Image } from "react-native";
 //import TestTable from '../Overview/TestTable';
 
 export function StartPage() {
@@ -15,7 +15,7 @@ export function StartPage() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#81DAF5',
+        backgroundColor: '#7FB285',
         alignItems: 'center',
         justifyContent: 'center',
     },

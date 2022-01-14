@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button, Vibration } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 
@@ -23,6 +23,7 @@ export function Scanner({navigation}) {
             //window.location.href = '../Overview/ContentsPage.js';
             const param = (data.split(".").pop());
             const str = param.substring(0, param.length - 1);
+            Vibration.vibrate();
             navigation.navigate('Inhalt', {
                 folder: str
             })

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 //import TestTable from './TestTable.js';
-import { Text, View, StyleSheet, TextInput, Button, Linking  } from "react-native";
+import {Text, View, StyleSheet, TextInput, Button, Linking, ScrollView, Pressable} from "react-native";
 import db from "../Database/firebase.config";
 import {TouchableHighlight} from "react-native-web";
 
@@ -84,28 +84,56 @@ export function Overview({navigation}){
     }
 
     return(
-        <View>
-            <Text>
-                {folders.map(item => {
-                    return(
-                    <View>
-                        <Text onPress={() => onPress(item)}> {item.label}</Text>
-                        <Text onPress={() => downloadQrCode(item)}>
-                            <View style={{backgroundColor: 'green'}}>
-                                <Text>Download</Text>
-                            </View>
+        <ScrollView style={styles.container}>
+            {folders.map(item => {
+                return(
+                <View>
+                        <Text style={styles.text} onPress={() => onPress(item)}> {item.label}</Text>
+                        <Text style={styles.textButton} onPress={() => downloadQrCode(item)}>
+                                Open QR-Code
                         </Text>
-                    </View>)
 
-                })}
-            </Text>
+                </View>)
 
+            })}
             <Text>
                 {'\n'}
             </Text>
-            <TextInput style={{width: '100%'}} placeholder="Datenbankname" onChange={handleChangeNewFolder}/>
-            <Button title="Erstellen" onPress={submitFolder}/>
+            <TextInput style={styles.textInput} placeholder="Datenbankname" onChange={handleChangeNewFolder}/>
+            <Pressable style={styles.button} onPress={submitFolder}>
+                <Text style={styles.text}>Erstellen</Text>
+            </Pressable>
 
-        </View>
+        </ScrollView>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#7FB285',
+    },
+    textButton: {
+        backgroundColor: '#4F8255',
+        textAlign: 'center',
+        color: '#F4F4F8'
+    },
+    textInput: {
+        backgroundColor: '#4F8255',
+        textAlign: 'center',
+        color: '#F4F4F8',
+    },
+    text: {
+        textAlign: 'center',
+        fontSize: 25,
+        fontWeight: "bold",
+        lineHeight: 100
+    },
+    button:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 4,
+        elevation: 3,
+        backgroundColor: '#363732',
+    }
+});

@@ -21,12 +21,13 @@ export function Scanner({navigation}) {
         if(data.includes("ordner.")){
             //Aufrufen von entsprechender ContentsPage
             //window.location.href = '../Overview/ContentsPage.js';
+            const param = (data.split(".").pop());
+            const str = param.substring(0, param.length - 1);
             navigation.navigate('Inhalt', {
-                folder: (data.split(".").pop())
+                folder: str
             })
 
         }
-        alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     };
     if (hasPermission === false) {
         return <Text>Camera: Access denied</Text>;

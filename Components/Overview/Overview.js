@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 //import TestTable from './TestTable.js';
-import { Text, View, StyleSheet, TextInput, Button,  } from "react-native";
+import { Text, View, StyleSheet, TextInput, Button, Linking  } from "react-native";
 import db from "../Database/firebase.config";
+import {TouchableHighlight} from "react-native-web";
 
 //page containing Overview over Structure
 export function Overview({navigation}){
@@ -51,11 +52,13 @@ export function Overview({navigation}){
         });
     }, []);
 
-    function downloadQrCode(){
-
-        setWord("ordner." + folder)
+    function downloadQrCode(event){
+        console.log(event);
+        setWord(event.value);
         setQrCode
-        (`http://api.qrserver.com/v1/create-qr-code/?data=${word}!&size=${size}x${size}&bgcolor=${bgColor}`);
+        (`http://api.qrserver.com/v1/create-qr-code/?data=ordner.${event.value}!&size=${size}x${size}&bgcolor=${bgColor}`);
+        console.log(qrCode);
+        Linking.openURL(`http://api.qrserver.com/v1/create-qr-code/?data=ordner.${event.value}!&size=${size}x${size}&bgcolor=${bgColor}`);
     }
 
     function onPress(item){
@@ -84,7 +87,16 @@ export function Overview({navigation}){
         <View>
             <Text>
                 {folders.map(item => {
-                    return <Text onPress={() => onPress(item)}> {item.label}{'\n'}</Text>
+                    return(
+                    <View>
+                        <Text onPress={() => onPress(item)}> {item.label}</Text>
+                        <Text onPress={() => downloadQrCode(item)}>
+                            <View style={{backgroundColor: 'green'}}>
+                                <Text>Download</Text>
+                            </View>
+                        </Text>
+                    </View>)
+
                 })}
             </Text>
 

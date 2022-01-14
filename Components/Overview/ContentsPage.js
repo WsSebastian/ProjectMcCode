@@ -3,8 +3,9 @@ import Firebase from '../Database/Firebase'
 import { Text, View, StyleSheet } from "react-native";
 import db from '../Database/firebase.config';
 
-export function ContentsPage(props){
+export function ContentsPage({route, navigation}){
 
+    const props = route.params;
     /*
     const [blogs,setBlogs]=useState([])
     const fetchBlogs=async()=>{

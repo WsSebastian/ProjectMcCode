@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 
-export function Scanner() {
+export function Scanner({navigation}) {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
     const [text, setText] = useState('Not yet scanned')
@@ -21,7 +21,7 @@ export function Scanner() {
         if(data.includes("ordner.")){
             //Aufrufen von entsprechender ContentsPage
             //window.location.href = '../Overview/ContentsPage.js';
-            navigator.navigate('../Overview/ContentsPage.js', {
+            navigation.navigate('Inhalt', {
                 folder: (data.split(".").pop())
             })
 

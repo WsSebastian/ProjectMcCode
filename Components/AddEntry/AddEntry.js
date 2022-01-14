@@ -116,8 +116,8 @@ export function AddEntry(props) {
 
     const [folders, setFolders] = useState([]);
     const [folder, setFolder] = useState({
-        label: props.folder,
-        value: props.folder
+        label: props.title,
+        value: props.id
     });
 
     useEffect(() => {
@@ -126,10 +126,13 @@ export function AddEntry(props) {
             snapshot.forEach((folder) => postData.push({ ...folder.data(), id: folder.id }));
             console.log(postData);
 
-            postData.forEach((folder) => setFolders([...folders, {
-                label: folder.id,
-                value: folder.id
-            }]))
+            const result = [];
+            postData.forEach((folder) => result.push({
+                label: folder.title,
+                value: folder.id,
+            }));
+            setFolders(result);
+            console.log(folders);
         });
     }, []);
 
@@ -190,10 +193,6 @@ export function AddEntry(props) {
                     {'\n'}
                     <TextInput style={{width: '100%'}} placeholder="Beschreibung" onChange={handleChangeDescription}/>
                     {'\n'}
-                </Text>
-                <Text>
-                    Kategorie:
-
                 </Text>
                 <Button title="Absenden" onPress={saveEntry}/>
             </View>

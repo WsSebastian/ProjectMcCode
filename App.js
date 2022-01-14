@@ -10,12 +10,35 @@ import { StartPage } from "./Components/StartPage/StartPage";
 
 import * as Icon from '@expo/vector-icons';
 import { ColorPropType } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const Tab = createBottomTabNavigator();
 //Start Page Navigation zu -> Overview, AddEntry, Scanner
 
 export default function App() {
 
+    const OverviewStack = createStackNavigator();
+    const ScannerStack = createStackNavigator();
+
+    function ScannerStackScreen(){
+
+        return(
+            <ScannerStack.Navigator>
+                <ScannerStack.Screen name={"Scanner"} component={Scanner}/>
+                <ScannerStack.Screen name={"Inhalt"} component={ContentsPage}/>
+            </ScannerStack.Navigator>
+        )
+    }
+
+    function OverviewStackScreen(){
+
+      return(
+        <OverviewStack.Navigator>
+          <OverviewStack.Screen name={"Ordner"} component={Overview}/>
+          <OverviewStack.Screen name={"Inhalt"} component={ContentsPage}/>
+        </OverviewStack.Navigator>
+      );
+    }
 
 
     return (
@@ -52,15 +75,9 @@ export default function App() {
           options={{title:'Home'
           }}
           />
-          <Tab.Screen name="Overview" component={Overview}
-          options={{title:'Übersicht'
-          }}
+          <Tab.Screen name="Übersicht" component={OverviewStackScreen}
           />
-          <Tab.Screen name="ContentTest" children={()=><ContentsPage folder={"ordner1"}/>}
-          options={{title:'ContentTest'
-          }}
-          />
-          <Tab.Screen name="ScannerButton" component={Scanner}
+          <Tab.Screen name="ScannerButton" component={ScannerStackScreen}
           options={{title:'Scan',
             tabBarIcon: ({focused, size, color}) =>
               <Icon.Ionicons

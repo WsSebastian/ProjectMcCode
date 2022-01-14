@@ -49,12 +49,14 @@ export default function App() {
               tabBarIcon: ({focused, size, color}) =>{
                 let icon;
 
-                if(route.name === 'CreateDB')
-                  icon = focused ? 'add-circle' : 'add-circle-outline';
-                else if (route.name === 'EditDB')
-                  icon = focused ? 'construct' : 'construct-outline';
-                else if (route.name === 'Settings')
-                  icon = focused ? 'ellipsis-vertical' : 'ellipsis-vertical-outline';
+                if(route.name === 'StartPage')
+                  icon = focused ? 'home' : 'home-outline';
+                else if (route.name === 'ScannerButton')
+                  icon = focused ? 'camera' : 'camera-outline';
+                else if (route.name === 'Übersicht')
+                  icon = focused ? 'documents' : 'documents-outline';
+                else if (route.name === 'AddEntryButton')
+                    icon = focused ? 'add-circle' : 'add-circle-outline'
                 return(
                   <Icon.Ionicons
                     name={icon}

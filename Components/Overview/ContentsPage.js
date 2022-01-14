@@ -38,7 +38,6 @@ export function ContentsPage({route, navigation}){
                         <Text key={content.title} className="contents-container">
                             <Text>{content.title}</Text>
                             <Text>{content.description}</Text>
-                            <Text>{content.category}</Text>
                         </Text>
                     )
                 })

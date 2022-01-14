@@ -102,9 +102,8 @@ export function Overview({navigation}){
 
             <Text>
                 {'\n'}
-                <TextInput style={{width: '100%'}} placeholder="Datenbankname" onChange={handleChangeNewFolder}/>
-                {'\n'}
             </Text>
+            <TextInput style={{width: '100%'}} placeholder="Datenbankname" onChange={handleChangeNewFolder}/>
             <Button title="Erstellen" onPress={submitFolder}/>
 
         </View>

@@ -157,8 +157,7 @@ export function AddEntry(props) {
         //event.preventDefault();
         db.collection('ordner').doc(folder).collection("inhalt").add({
             title: title,
-            description: description,
-            category: category
+            description: description
         }).then(() => {
             console.log('Item added!');
         })
@@ -179,21 +178,21 @@ export function AddEntry(props) {
                 <Text>
                     Name:
                     {'\n'}
-                    <TextInput style={{width: '100%'}} placeholder="Name" onChange={handleChangeTitle}/>
-                    {'\n'}
                 </Text>
+                <TextInput style={{width: '100%'}} placeholder="Name" onChange={handleChangeTitle} keyboardType='default'/>
                 <Text>
+                    {'\n'}
                     Ordner:
                     {'\n'}
-                    <RNPickerSelect value={folder} onValueChange={currentFolder => setFolder(currentFolder)} items={folders}/>
-                    {'\n'}
                 </Text>
+                <RNPickerSelect value={folder} onValueChange={currentFolder => setFolder(currentFolder)} items={folders}/>
                 <Text>
+                    {'\n'}
                     Beschreibung:
                     {'\n'}
-                    <TextInput style={{width: '100%'}} placeholder="Beschreibung" onChange={handleChangeDescription}/>
-                    {'\n'}
                 </Text>
+                <TextInput tyle={{width: '100%'}} placeholder="Beschreibung" onChange={handleChangeDescription} keyboardType='default'/>
+                <Text>{'\n'}</Text>
                 <Button title="Absenden" onPress={saveEntry}/>
             </View>
         </View>

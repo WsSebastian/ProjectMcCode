@@ -109,7 +109,8 @@ class AddEntry extends React.Component{
 export default AddEntry;
 */
 
-export function AddEntry(props) {
+export function EditEntry({route, navigation}) {
+    const props = route.params;
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
     const [category, setCategory] = useState("Buch");
@@ -120,21 +121,7 @@ export function AddEntry(props) {
         value: props.id
     });
 
-    useEffect(() => {
-        return db.collection('ordner').onSnapshot((snapshot) => {
-            const postData = [];
-            snapshot.forEach((folder) => postData.push({ ...folder.data(), id: folder.id }));
-            console.log(postData);
 
-            const result = [];
-            postData.forEach((folder) => result.push({
-                label: folder.title,
-                value: folder.id,
-            }));
-            setFolders(result);
-            console.log(folders);
-        });
-    }, []);
 
 
     const handleChangeTitle = (event) => {
@@ -153,15 +140,23 @@ export function AddEntry(props) {
 
     function saveEntry() {
 
-        console.log(title, description, category, folder)
-        //event.preventDefault();
-        db.collection('ordner').doc(folder).collection("inhalt").add({
+        db.collection('ordner').doc(props.folder).collection("inhalt").doc(props.content.id).set({
             title: title,
             description: description
         }).then(() => {
-            console.log('Item added!');
+            console.log('Item edited!');
         })
+        navigation.goBack();
     }
+
+    function deleteEntry(){
+
+        db.collection('ordner').doc(props.folder).collection('inhalt').doc(props.content.id).delete().then(() => {
+            console.log('Folder deleted!');
+        });
+        navigation.goBack();
+    }
+
 
 
     //Benötigt:
@@ -173,25 +168,23 @@ export function AddEntry(props) {
     //BarCode Scannen / ...
     //...
     return(
-        <View style={styles.container}>
+        <View style={{
+            flex: 1,
+            backgroundColor: '#6FA275'
+        }}>
+            <Text style={styles.text}>{props.content.title}:</Text>
             <View className="form" style={styles.container}>
                 <Text styles={styles.text}>
                     Name:
                     {'\n'}
                 </Text>
-                <TextInput style={styles.textInput} placeholder="Name" onChange={handleChangeTitle} keyboardType='default'/>
-                <Text styles={styles.text}>
-                    {'\n'}
-                    Ordner:
-                    {'\n'}
-                </Text>
-                <RNPickerSelect value={folder} onValueChange={currentFolder => setFolder(currentFolder)} items={folders}/>
+                <TextInput style={styles.textInput} placeholder={props.title} onChange={handleChangeTitle} keyboardType='default'/>
                 <Text styles={styles.text}>
                     {'\n'}
                     Beschreibung:
                     {'\n'}
                 </Text>
-                <TextInput style={styles.textInput} placeholder="Beschreibung" onChange={handleChangeDescription} keyboardType='default'/>
+                <TextInput style={styles.textInput} placeholder={props.description} onChange={handleChangeDescription} keyboardType='default'/>
                 <Text>{'\n'}</Text>
                 <Pressable style={styles.button} onPress={saveEntry}>
                     <Text style={{
@@ -199,7 +192,15 @@ export function AddEntry(props) {
                         fontSize: 15,
                         fontWeight: "bold",
                         lineHeight: 30
-                    }}>Hinzufügen</Text>
+                    }}>Ändern</Text>
+                </Pressable>
+                <Pressable style={styles.deleteButton} onPress={deleteEntry}>
+                    <Text style={{
+                        textAlign: 'center',
+                        fontSize: 15,
+                        fontWeight: "bold",
+                        lineHeight: 30
+                    }}>Eintrag löschen</Text>
                 </Pressable>
             </View>
         </View>
@@ -238,6 +239,15 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         elevation: 3,
         backgroundColor: '#545C52',
+        borderColor: '#363732',
+        borderWidth: 2
+    },
+    deleteButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
+        elevation: 3,
+        backgroundColor: '#DD6D2D',
         borderColor: '#363732',
         borderWidth: 2
     }

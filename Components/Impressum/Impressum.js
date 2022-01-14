@@ -6,7 +6,17 @@ export function Impressum(){
 
     return(
       <View style={styles.container}>
-          <Text>Impressumstext</Text>
+          <Text style={styles.text}>
+              Vertretung durch:{'\n'}
+              Jonas Peltzer{'\n'}
+              Sebastian Schleiken{'\n'}{'\n'}
+
+              Kontakt:{'\n'}
+              E-Mail:   {'\n'}
+              jonas.peltzer@stud.hs-ruhrwest.de{'\n'}
+              sebastian.schleiken@stud.hs-ruhrwest.de{'\n'}
+              Tel.: -{'\n'}
+          </Text>
       </View>
     );
 }
@@ -27,9 +37,10 @@ const styles = StyleSheet.create({
         color: '#F4F4F8',
     },
     text: {
-        textAlign: 'center',
-        fontSize: 25,
+        textAlign: 'left',
+        fontSize: 15,
         fontWeight: "bold",
-        lineHeight: 100
+        lineHeight: 20,
+        color: '#363732'
     }
 });

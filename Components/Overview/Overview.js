@@ -65,7 +65,8 @@ export function Overview({navigation}){
         // do stuff
 
         navigation.navigate('Inhalt', {
-           folder: item.value
+            folder: item.value,
+            title: item.label
         })
 
         return
@@ -96,12 +97,25 @@ export function Overview({navigation}){
                 </View>)
 
             })}
-            <Text>
+            <Text style={{
+                textAlign: 'center',
+                fontSize: 15,
+                fontWeight: "bold",
+                lineHeight: 25,
+                borderTopColor: '#363732',
+                borderTopWidth: 4
+            }}>
                 {'\n'}
+                Neue Datenbank erstellen:
             </Text>
             <TextInput style={styles.textInput} placeholder="Datenbankname" onChange={handleChangeNewFolder}/>
             <Pressable style={styles.button} onPress={submitFolder}>
-                <Text style={styles.text}>Erstellen</Text>
+                <Text style={{
+                    textAlign: 'center',
+                    fontSize: 15,
+                    fontWeight: "bold",
+                    lineHeight: 30
+                }}>Erstellen</Text>
             </Pressable>
 
         </ScrollView>
@@ -114,26 +128,32 @@ const styles = StyleSheet.create({
         backgroundColor: '#7FB285',
     },
     textButton: {
-        backgroundColor: '#4F8255',
-        textAlign: 'center',
-        color: '#F4F4F8'
-    },
-    textInput: {
-        backgroundColor: '#4F8255',
+        backgroundColor: '#6FA275',
         textAlign: 'center',
         color: '#F4F4F8',
+        borderRadius: 10
+    },
+    textInput: {
+        backgroundColor: '#6FA275',
+        textAlign: 'center',
+        color: '#F4F4F8',
+        borderRadius: 10
     },
     text: {
         textAlign: 'center',
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: "bold",
-        lineHeight: 100
+        lineHeight: 80,
+        borderTopColor: '#363732',
+        borderTopWidth: 4
     },
     button:{
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 4,
+        borderRadius: 10,
         elevation: 3,
-        backgroundColor: '#363732',
+        backgroundColor: '#545C52',
+        borderColor: '#363732',
+        borderWidth: 2
     }
 });

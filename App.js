@@ -12,6 +12,7 @@ import * as Icon from '@expo/vector-icons';
 import {ColorPropType, StyleSheet} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {Impressum} from "./Components/Impressum/Impressum";
+import {EditEntry} from "./Components/AddEntry/EditEntry";
 
 const Tab = createBottomTabNavigator();
 //Start Page Navigation zu -> Overview, AddEntry, Scanner
@@ -33,6 +34,10 @@ export default function App() {
                     headerTintColor: '#DD6D2D',
                     headerStyle: styles.header
                 }}/>
+                <ScannerStack.Screen name={"Bearbeiten"} component={EditEntry} options={{
+                    headerTintColor: '#DD6D2D',
+                    headerStyle: styles.header
+                }}/>
             </ScannerStack.Navigator>
         )
     }
@@ -49,6 +54,10 @@ export default function App() {
               headerTintColor: '#DD6D2D',
               headerStyle: styles.header
           }}/>
+            <ScannerStack.Screen name={"Bearbeiten"} component={EditEntry} options={{
+                headerTintColor: '#DD6D2D',
+                headerStyle: styles.header
+            }}/>
         </OverviewStack.Navigator>
       );
     }

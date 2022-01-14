@@ -6,7 +6,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 export function Scanner({navigation}) {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
-    const [text, setText] = useState('Not yet scanned')
+    const [text, setText] = useState('Suche QR-Code')
 
     useEffect(() => {
         (async () => {
@@ -31,7 +31,7 @@ export function Scanner({navigation}) {
         }
     };
     if (hasPermission === false) {
-        return <Text>Camera: Access denied</Text>;
+        return <Text>Camera: Access denied!</Text>;
     }
     return (
         <View style={styles.container}>
@@ -42,7 +42,7 @@ export function Scanner({navigation}) {
             </View>
             <Text style={styles.maintext}>{text}</Text>
 
-            {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='#D16014' />}
+            {scanned && <Button title={'Scan'} onPress={() => setScanned(false)} color='#DD6D2D' />}
         </View>
     );
 }
@@ -50,7 +50,7 @@ export function Scanner({navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#7FB285',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         width: 300,
         overflow: 'hidden',
         borderRadius: 30,
-        backgroundColor: 'tomato'
+        backgroundColor: '#DD6D2D'
     }
 });
 

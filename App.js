@@ -69,7 +69,10 @@ export default function App() {
                 else if (route.name === 'Übersicht')
                   icon = focused ? 'documents' : 'documents-outline';
                 else if (route.name === 'AddEntryButton')
-                    icon = focused ? 'add-circle' : 'add-circle-outline'
+                    icon = focused ? 'add-circle' : 'add-circle-outline';
+                else if (route.name === 'Impressum'){
+                    icon = focused ? 'file-tray-full' : 'file-tray-full-outline';
+                }
                 return(
                   <Icon.Ionicons
                     name={icon}

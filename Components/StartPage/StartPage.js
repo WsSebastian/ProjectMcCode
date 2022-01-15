@@ -6,8 +6,8 @@ export function StartPage() {
 
 
     return (
-        <View style={styles.container}>
-            <Image source={require('./MySort_Logo.png')} />
+        <View style={styles.containerScanner}>
+            <Image source={require('./logoHomeScreen.png')} />
         </View>
 
     );

@@ -179,7 +179,11 @@ export default function App() {
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#121212',
+        backgroundColor: '#121212'
+    },
+    containerDes:{
+        backgroundColor: '#1A231B',
+        borderRadius: 10
     },
     containerScanner: {
         flex: 1,
@@ -218,6 +222,14 @@ export const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: "bold",
         lineHeight: 30,
+        color: '#8FC295',
+    },
+    textSmallDes: {
+        textAlign: 'center',
+        fontSize: 15,
+        fontWeight: "bold",
+        lineHeight: 30,
+        backgroundColor: '#1A231B',
         color: '#8FC295',
     },
     textSmallBorder: {

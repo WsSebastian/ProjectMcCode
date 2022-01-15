@@ -37,12 +37,12 @@ export function EditEntry({route, navigation}) {
         <View style={styles.container}>
             <Text style={styles.text}>{props.content.title}:</Text>
             <View className="form" style={styles.container}>
-                <Text styles={styles.text}>
+                <Text style={styles.textSmall}>
                     Name:
                     {'\n'}
                 </Text>
                 <TextInput style={styles.textInput} placeholder={props.title} onChangeText={text=>setTitle(text)} keyboardType='default'/>
-                <Text styles={styles.text}>
+                <Text style={styles.textSmall}>
                     {'\n'}
                     Beschreibung:
                     {'\n'}
@@ -50,21 +50,14 @@ export function EditEntry({route, navigation}) {
                 <TextInput style={styles.textInput} placeholder={props.description} onChangeText={text=>setDescription(text)}  keyboardType='default'/>
                 <Text>{'\n'}</Text>
                 <Pressable style={styles.button} onPress={saveEntry}>
-                    <Text style={{
-                        textAlign: 'center',
-                        fontSize: 15,
-                        fontWeight: "bold",
-                        lineHeight: 30
-                    }}>Ändern</Text>
+                    <Text style={styles.textSmall}>Ändern</Text>
                 </Pressable>
-                <Pressable style={styles.deleteButton} onPress={deleteEntry}>
-                    <Text style={{
-                        textAlign: 'center',
-                        fontSize: 15,
-                        fontWeight: "bold",
-                        lineHeight: 30
-                    }}>Eintrag löschen</Text>
-                </Pressable>
+                <View style={styles.deleteContainer}>
+
+                    <Pressable style={styles.deleteButton} onPress={deleteEntry}>
+                        <Text style={styles.textSmall}>Eintrag löschen</Text>
+                    </Pressable>
+                </View>
             </View>
         </View>
     );

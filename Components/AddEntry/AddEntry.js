@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Text, View, StyleSheet, TextInput, Button, Pressable,} from "react-native";
+import {Text, View, StyleSheet, TextInput, Button, Pressable, Image} from "react-native";
 import RNPickerSelect from 'react-native-picker-select';
 
 import db from "../Database/firebase.config";
@@ -34,6 +34,8 @@ export function AddEntry({route, navigation}) {
             console.log(folders);
         });
     }, []);
+
+
 
     function saveEntry() {
 
@@ -73,6 +75,7 @@ export function AddEntry({route, navigation}) {
                 </Text>
                 <TextInput style={styles.textInput} placeholder="Beschreibung" onChangeText={text=>setDescription(text)}  keyboardType='default'/>
                 <Text>{'\n'}</Text>
+
                 <Pressable style={styles.button} onPress={saveEntry}>
                     <Text style={styles.textSmall}>Hinzufügen</Text>
                 </Pressable>

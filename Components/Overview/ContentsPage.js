@@ -10,7 +10,10 @@ export function ContentsPage({route, navigation}){
     const [contents, setContents] = useState([]);
     const [newName, setNewName] = useState();
 
+
     useEffect(() => {
+        //const storeData = db.collection(props.user).doc(props.folder).;
+        //console.log(storeData);
         return db.collection(props.user).doc(props.folder).collection('inhalt').onSnapshot((snapshot) => {
             const postData = [];
             snapshot.forEach((doc) => postData.push({ ...doc.data(), id: doc.id }));
@@ -54,7 +57,7 @@ export function ContentsPage({route, navigation}){
                         return(
                             <Text style={styles.textSmallBorder} key={content.title} onPress={() => editEntry(content)}>
                                 <Text style={styles.text}>Name: {content.title}</Text>
-                                <Text>{'\n'}Beschreibung: {content.description}</Text>
+                                <Text style={styles.textSmallDes}>{'\n'}Beschreibung: {content.description}</Text>
                             </Text>
                         )
                     })

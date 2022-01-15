@@ -3,6 +3,8 @@ import { Text, View, StyleSheet, Image } from "react-native";
 //import TestTable from '../Overview/TestTable';
 
 export function StartPage() {
+
+
     return (
         <View style={styles.container}>
             <Image source={require('./MySort_Logo.png')} />

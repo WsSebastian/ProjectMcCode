@@ -140,7 +140,7 @@ export function EditEntry({route, navigation}) {
 
     function saveEntry() {
 
-        db.collection('ordner').doc(props.folder).collection("inhalt").doc(props.content.id).set({
+        db.collection(props.user).doc(props.folder).collection("inhalt").doc(props.content.id).set({
             title: title,
             description: description
         }).then(() => {
@@ -151,7 +151,7 @@ export function EditEntry({route, navigation}) {
 
     function deleteEntry(){
 
-        db.collection('ordner').doc(props.folder).collection('inhalt').doc(props.content.id).delete().then(() => {
+        db.collection(props.user).doc(props.folder).collection('inhalt').doc(props.content.id).delete().then(() => {
             console.log('Folder deleted!');
         });
         navigation.goBack();

@@ -109,7 +109,9 @@ class AddEntry extends React.Component{
 export default AddEntry;
 */
 
-export function AddEntry(props) {
+export function AddEntry({route, navigation}) {
+
+    const props = route.params;
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
     const [category, setCategory] = useState("Buch");
@@ -121,7 +123,8 @@ export function AddEntry(props) {
     });
 
     useEffect(() => {
-        return db.collection('ordner').onSnapshot((snapshot) => {
+        console.log(route.params, props.user);
+        return db.collection(props.user).onSnapshot((snapshot) => {
             const postData = [];
             snapshot.forEach((folder) => postData.push({ ...folder.data(), id: folder.id }));
             console.log(postData);
@@ -155,7 +158,7 @@ export function AddEntry(props) {
 
         console.log(title, description, category, folder)
         //event.preventDefault();
-        db.collection('ordner').doc(folder).collection("inhalt").add({
+        db.collection(props.user).doc(folder).collection("inhalt").add({
             title: title,
             description: description
         }).then(() => {

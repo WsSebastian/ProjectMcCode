@@ -4,8 +4,10 @@ import {Text, View, StyleSheet, TextInput, Button, Linking, ScrollView, Pressabl
 import db from "../Database/firebase.config";
 import {TouchableHighlight} from "react-native-web";
 
+
 //page containing Overview over Structure
-export function Overview({navigation}){
+export function Overview({route, navigation}){
+    const props = route.params;
 
     const [folders, setFolders] = useState([]);
     const [folder, setFolder] = useState();
@@ -19,7 +21,7 @@ export function Overview({navigation}){
 
 
     useEffect(() => {
-        return db.collection('ordner').onSnapshot((snapshot) => {
+        return db.collection(props.user).onSnapshot((snapshot) => {
             const postData = [];
             snapshot.forEach((folder) => postData.push({ ...folder.data(), id: folder.id }));
             console.log(postData);
@@ -77,7 +79,7 @@ export function Overview({navigation}){
     }
 
     function submitFolder(){
-        db.collection('ordner').add({
+        db.collection(props.user).add({
                 title: newFolder
         }).then(() => {
             console.log('Item added!');

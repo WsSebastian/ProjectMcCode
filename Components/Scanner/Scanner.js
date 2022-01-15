@@ -3,7 +3,10 @@ import { Text, View, StyleSheet, Button, Vibration } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 
-export function Scanner({navigation}) {
+export function Scanner({route, navigation}) {
+
+    const props = route.params;
+
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
     const [text, setText] = useState('Suche QR-Code')

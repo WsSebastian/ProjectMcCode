@@ -23,7 +23,7 @@ export function ContentsPage({route, navigation}){
     const [newName, setNewName] = useState();
 
     useEffect(() => {
-        return db.collection('ordner').doc(props.folder).collection('inhalt').onSnapshot((snapshot) => {
+        return db.collection(props.user).doc(props.folder).collection('inhalt').onSnapshot((snapshot) => {
             const postData = [];
             snapshot.forEach((doc) => postData.push({ ...doc.data(), id: doc.id }));
             console.log(postData);  // <------
@@ -44,7 +44,7 @@ export function ContentsPage({route, navigation}){
     }
 
     function editName(){
-        db.collection('ordner').doc(props.folder).set({
+        db.collection(props.user).doc(props.folder).set({
             title: newName
         }).then(() => {
             console.log('Folder edited!');
@@ -53,7 +53,7 @@ export function ContentsPage({route, navigation}){
 
     function deleteFolder(){
 
-        db.collection('ordner').doc(props.folder).delete().then(() => {
+        db.collection(props.user).doc(props.folder).delete().then(() => {
             console.log('Folder deleted!');
         });
         navigation.goBack();

@@ -17,26 +17,23 @@ import {useEffect, useState} from "react";
 import {getAuth, onAuthStateChanged, signInAnonymously} from "firebase/auth";
 
 const Tab = createBottomTabNavigator();
-//Start Page Navigation zu -> Overview, AddEntry, Scanner
+const auth = getAuth();
+signInAnonymously(auth)
+    .then(() => {
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+    });
 
 export default function App() {
+
 
     const [user, setUser] = useState("");
 
     const OverviewStack = createStackNavigator();
     const ScannerStack = createStackNavigator();
     const EntryStack = createStackNavigator();
-
-    const auth = getAuth();
-    signInAnonymously(auth)
-        .then(() => {
-            // Signed in..
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // ...
-        });
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -52,15 +49,15 @@ export default function App() {
         return(
             <ScannerStack.Navigator>
                 <ScannerStack.Screen initialParams={{user: user}} name={"Scanner"} component={Scanner} options={{
-                    headerTintColor: '#DD6D2D',
+                    headerTintColor: '#8FC295',
                     headerStyle: styles.header
                 }}/>
                 <ScannerStack.Screen initialParams={{user: user}} name={"Inhalt"} component={ContentsPage} options={{
-                    headerTintColor: '#DD6D2D',
+                    headerTintColor: '#8FC295',
                     headerStyle: styles.header
                 }}/>
                 <ScannerStack.Screen initialParams={{user: user}} name={"Bearbeiten"} component={EditEntry} options={{
-                    headerTintColor: '#DD6D2D',
+                    headerTintColor: '#8FC295',
                     headerStyle: styles.header
                 }}/>
             </ScannerStack.Navigator>
@@ -72,15 +69,15 @@ export default function App() {
       return(
         <OverviewStack.Navigator>
           <OverviewStack.Screen initialParams={{user: user}} name={"Ordner"} component={Overview} options={{
-              headerTintColor: '#DD6D2D',
+              headerTintColor: '#8FC295',
               headerStyle: styles.header
           }}/>
           <OverviewStack.Screen initialParams={{user: user}} name={"Inhalt"} component={ContentsPage} options={{
-              headerTintColor: '#DD6D2D',
+              headerTintColor: '#8FC295',
               headerStyle: styles.header
           }}/>
             <ScannerStack.Screen initialParams={{user: user}} name={"Bearbeiten"} component={EditEntry} options={{
-                headerTintColor: '#DD6D2D',
+                headerTintColor: '#8FC295',
                 headerStyle: styles.header
             }}/>
         </OverviewStack.Navigator>
@@ -91,7 +88,7 @@ export default function App() {
         return(
             <EntryStack.Navigator>
                 <EntryStack.Screen name={"Eintrag"} initialParams={{user: user}} component={AddEntry} options={{
-                    headerTintColor: '#DD6D2D',
+                    headerTintColor: '#8FC295',
                     headerStyle: styles.header
                 }}/>
             </EntryStack.Navigator>
@@ -129,7 +126,7 @@ export default function App() {
                         }
                     }}
                     tabBarOptions={{
-                        activeTintColor: '#DD6D2D',
+                        activeTintColor: '#8FC295',
                     }}
                 >
                     <Tab.Screen
@@ -138,39 +135,39 @@ export default function App() {
                         options={{
                             title:'Home',
                             headerStyle: styles.header,
-                            headerTintColor: '#DD6D2D',
-                            tabBarInactiveBackgroundColor: '#363732',
-                            tabBarActiveBackgroundColor: '#545C52'
+                            headerTintColor: '#8FC295',
+                            tabBarInactiveBackgroundColor: '#000000',
+                            tabBarActiveBackgroundColor: '#181C18'
                         }}
                     />
                     <Tab.Screen name="Übersicht" component={OverviewStackScreen} options={{
                         headerShown: false,
-                        tabBarInactiveBackgroundColor: '#363732',
-                        tabBarActiveBackgroundColor: '#545C52'
+                        tabBarInactiveBackgroundColor: '#000000',
+                        tabBarActiveBackgroundColor: '#181C18',
                     }}
                     />
                     <Tab.Screen name="ScannerButton" component={ScannerStackScreen}
                                 options={{
                                     title:'Scan',
                                     headerShown: false,
-                                    tabBarInactiveBackgroundColor: '#363732',
-                                    tabBarActiveBackgroundColor: '#545C52',
+                                    tabBarInactiveBackgroundColor: '#000000',
+                                    tabBarActiveBackgroundColor: '#181C18',
                                 }}
                     />
                     <Tab.Screen name="AddEntryButton" component={EntryStackScreen}
                                 options={{
                                     title:'Add Entry',
                                     headerShown: false,
-                                    tabBarInactiveBackgroundColor: '#363732',
-                                    tabBarActiveBackgroundColor: '#545C52'
+                                    tabBarInactiveBackgroundColor: '#000000',
+                                    tabBarActiveBackgroundColor: '#181C18'
                                 }}
                     />
                     <Tab.Screen name="Impressum" component={Impressum} options={{
 
                         headerStyle: styles.header,
-                        headerTintColor: '#DD6D2D',
-                        tabBarInactiveBackgroundColor: '#363732',
-                        tabBarActiveBackgroundColor: '#545C52'
+                        headerTintColor: '#8FC295',
+                        tabBarInactiveBackgroundColor: '#000000',
+                        tabBarActiveBackgroundColor: '#181C18'
                     }}
                     />
                 </Tab.Navigator>
@@ -179,29 +176,97 @@ export default function App() {
     }
 
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#7FB285',
+        backgroundColor: '#121212',
+    },
+    containerScanner: {
+        flex: 1,
+        backgroundColor: '#121212',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    picker:{
+        backgroundColor: '#1B241C',
+        alignItems: 'center',
+        borderRadius: 10
     },
     textButton: {
-        backgroundColor: '#4F8255',
-        textAlign: 'center',
-        color: '#F4F4F8'
-    },
-    textInput: {
-        backgroundColor: '#4F8255',
+        backgroundColor: '#1B241C',
         textAlign: 'center',
         color: '#F4F4F8',
+        borderRadius: 10
+    },
+    textInput: {
+        backgroundColor: '#1B241C',
+        textAlign: 'center',
+        color: '#F4F4F8',
+        borderRadius: 10
     },
     text: {
         textAlign: 'center',
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: "bold",
-        lineHeight: 100
+        lineHeight: 80,
+        borderTopColor: '#010101',
+        color: '#8FC295',
+        borderTopWidth: 4
+    },
+    textSmall: {
+        textAlign: 'center',
+        fontSize: 15,
+        fontWeight: "bold",
+        lineHeight: 30,
+        color: '#8FC295',
+    },
+    textSmallBorder: {
+        textAlign: 'center',
+        fontSize: 15,
+        fontWeight: "bold",
+        lineHeight: 30,
+        borderTopColor: '#010101',
+        color: '#8FC295',
+        borderTopWidth: 4
+    },
+    button:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
+        elevation: 3,
+        backgroundColor: '#1B241C',
+        borderColor: '#181C18',
+        borderWidth: 2,
+    },
+    deleteButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
+        elevation: 3,
+        backgroundColor: '#293B2B',
+        borderColor: '#363732',
+        borderWidth: 2
+    },
+    deleteContainer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+    },
+    maintext: {
+        fontSize: 16,
+        margin: 20,
+        color: '#8FC295'
+    },
+    barcodebox: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 300,
+        width: 300,
+        overflow: 'hidden',
+        borderRadius: 30,
+        backgroundColor: '#DD6D2D'
     },
     header: {
-        backgroundColor: '#363732'
+        backgroundColor: '#000000',
     }
 
 });

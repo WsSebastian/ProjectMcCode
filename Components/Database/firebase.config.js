@@ -1,6 +1,7 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 
+// Configure Connection to firebase and initialize the backend
 const firebaseConfig = {
     apiKey: "AIzaSyDs855GrQZb_jGGyxhrykmZP2QMTKJlO10",
     authDomain: "projectmc-be2e1.firebaseapp.com",

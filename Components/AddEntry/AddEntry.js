@@ -6,7 +6,6 @@ import db from "../Database/firebase.config";
 import {styles} from "../../App";
 
 export function AddEntry({route, navigation}) {
-
     const props = route.params;
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
@@ -48,6 +47,8 @@ export function AddEntry({route, navigation}) {
         setTitle("");
         setDescription("");
     }
+
+    // Create form for the user
     return(
         <View style={styles.container}>
             <View className="form" style={styles.container}>

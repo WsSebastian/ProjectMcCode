@@ -31,7 +31,6 @@ export default function App() {
 
 
     const [user, setUser] = useState("");
-
     const OverviewStack = createStackNavigator();
     const ScannerStack = createStackNavigator();
     const EntryStack = createStackNavigator();
@@ -102,82 +101,69 @@ export default function App() {
     }
 
 
-        return (
-            <NavigationContainer>
-                <Tab.Navigator
-                    screenOptions={({route}) => {
-                        return{
-                            tabBarIcon: ({focused, size, color}) =>{
-                                let icon;
+    return (
+        <NavigationContainer>
+            <Tab.Navigator
+                screenOptions={({route}) => {
+                    return{
+                        tabBarIcon: ({focused, size, color}) =>{
+                            let icon;
 
-                                if(route.name === 'StartPage')
-                                    icon = focused ? 'home' : 'home-outline';
-                                else if (route.name === 'ScannerButton')
-                                    icon = focused ? 'camera' : 'camera-outline';
-                                else if (route.name === 'Übersicht')
-                                    icon = focused ? 'documents' : 'documents-outline';
-                                else if (route.name === 'AddEntryButton')
-                                    icon = focused ? 'add-circle' : 'add-circle-outline';
-                                else if (route.name === 'Impressum'){
-                                    icon = focused ? 'file-tray-full' : 'file-tray-full-outline';
-                                }
-                                return(
-                                    <Icon.Ionicons
-                                        name={icon}
-                                        size={size}
-                                        color={color}
-                                    />
-                                )
+                            if(route.name === 'StartPage')
+                                icon = focused ? 'home' : 'home-outline';
+                            else if (route.name === 'ScannerButton')
+                                icon = focused ? 'camera' : 'camera-outline';
+                            else if (route.name === 'Übersicht')
+                                icon = focused ? 'documents' : 'documents-outline';
+                            else if (route.name === 'AddEntryButton')
+                                icon = focused ? 'add-circle' : 'add-circle-outline';
+                            else if (route.name === 'Impressum'){
+                                icon = focused ? 'file-tray-full' : 'file-tray-full-outline';
                             }
+                            return(<Icon.Ionicons name={icon} size={size} color={color}/>)
                         }
-                    }}
-                    tabBarOptions={{
-                        activeTintColor: '#8FC295',
-                    }}
-                >
-                    <Tab.Screen
-                        name="StartPage"
-                        component={StartPage}
-                        options={{
-                            title:'Home',
-                            headerStyle: styles.header,
-                            headerTintColor: '#8FC295',
-                            tabBarInactiveBackgroundColor: '#000000',
-                            tabBarActiveBackgroundColor: '#181C18'
-                        }}
-                    />
-                    <Tab.Screen name="Übersicht" component={OverviewStackScreen} options={{
-                        headerShown: false,
-                        tabBarInactiveBackgroundColor: '#000000',
-                        tabBarActiveBackgroundColor: '#181C18',
-                    }}
-                    />
-                    <Tab.Screen name="ScannerButton" component={ScannerStackScreen}
-                                options={{
-                                    title:'Scan',
-                                    headerShown: false,
-                                    tabBarInactiveBackgroundColor: '#000000',
-                                    tabBarActiveBackgroundColor: '#181C18',
-                                }}
-                    />
-                    <Tab.Screen name="AddEntryButton" component={EntryStackScreen}
-                                options={{
-                                    title:'Add Entry',
-                                    headerShown: false,
-                                    tabBarInactiveBackgroundColor: '#000000',
-                                    tabBarActiveBackgroundColor: '#181C18'
-                                }}
-                    />
-                    <Tab.Screen name="Impressum" component={Impressum} options={{
-
+                    }
+                }}
+                tabBarOptions={{
+                    activeTintColor: '#8FC295',
+                }}>
+                <Tab.Screen name="StartPage" component={StartPage}
+                    options={{
+                        title:'Home',
                         headerStyle: styles.header,
                         headerTintColor: '#8FC295',
                         tabBarInactiveBackgroundColor: '#000000',
                         tabBarActiveBackgroundColor: '#181C18'
-                    }}
-                    />
-                </Tab.Navigator>
-            </NavigationContainer>);
+                    }}/>
+                <Tab.Screen name="Übersicht" component={OverviewStackScreen}
+                    options={{
+                        headerShown: false,
+                        tabBarInactiveBackgroundColor: '#000000',
+                        tabBarActiveBackgroundColor: '#181C18',
+                    }}/>
+                <Tab.Screen name="ScannerButton" component={ScannerStackScreen}
+                    options={{
+                        title:'Scan',
+                        headerShown: false,
+                        tabBarInactiveBackgroundColor: '#000000',
+                        tabBarActiveBackgroundColor: '#181C18',
+                    }}/>
+                <Tab.Screen name="AddEntryButton" component={EntryStackScreen}
+                    options={{
+                        title:'Add Entry',
+                        headerShown: false,
+                        tabBarInactiveBackgroundColor: '#000000',
+                        tabBarActiveBackgroundColor: '#181C18'
+                    }}/>
+                <Tab.Screen name="Impressum" component={Impressum}
+                    options={{
+                        headerStyle: styles.header,
+                        headerTintColor: '#8FC295',
+                        tabBarInactiveBackgroundColor: '#000000',
+                        tabBarActiveBackgroundColor: '#181C18'
+                     }}/>
+            </Tab.Navigator>
+        </NavigationContainer>);
 
     }
 

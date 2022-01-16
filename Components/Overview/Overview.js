@@ -34,8 +34,9 @@ export function Overview({route, navigation}){
             console.log(folders);
 
         });
-    }, []);
+    }, [])
 
+    //Opening QR-Code for Folder in Browser
     function downloadQrCode(event){
         console.log(event);
         setWord(event.value);
@@ -51,7 +52,6 @@ export function Overview({route, navigation}){
             folder: item.value,
             title: item.label
         })
-
         return
     }
 

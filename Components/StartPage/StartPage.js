@@ -7,7 +7,9 @@ export function StartPage() {
 
     return (
         <View style={styles.containerScanner}>
-            <Image source={require('./logoHomeScreen.png')} />
+            <Image
+                style={{width: 400, height: 400}}
+                source={require('./logoHomeScreen.png')} />
         </View>
 
     );

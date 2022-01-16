@@ -6,30 +6,28 @@ import {styles} from "../../App";
 export function ContentsPage({route, navigation}){
 
     const props = route.params;
-
     const [contents, setContents] = useState([]);
     const [newName, setNewName] = useState();
 
-
+    //Retrieving Documents in folder from firestore
     useEffect(() => {
-        //const storeData = db.collection(props.user).doc(props.folder).;
-        //console.log(storeData);
         return db.collection(props.user).doc(props.folder).collection('inhalt').onSnapshot((snapshot) => {
             const postData = [];
             snapshot.forEach((doc) => postData.push({ ...doc.data(), id: doc.id }));
-            console.log(postData);  // <------
+            console.log(postData);
             setContents(postData);
         });
     }, []);
 
+    //Navigating to Screen where Entry can be edited
     function editEntry(content) {
-
         navigation.navigate('Bearbeiten', {
             content: content,
             folder: props.folder
         })
     }
 
+    //editing Folder title in firestore
     function editName(){
         db.collection(props.user).doc(props.folder).set({
             title: newName
@@ -38,15 +36,14 @@ export function ContentsPage({route, navigation}){
         })
     }
 
+    //Deleting Folder and Content from firestore
     function deleteFolder(){
-
         contents.forEach((content) => db.collection(props.user).doc(props.folder).collection('inhalt').doc(content.id).delete());
         db.collection(props.user).doc(props.folder).delete().then(() => {
             console.log('Folder deleted!');
         });
         navigation.goBack();
     }
-
 
     return (
         <View style={styles.container}>

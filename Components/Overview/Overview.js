@@ -18,7 +18,7 @@ export function Overview({route, navigation}){
     const [bgColor, setBgColor] = useState("ffffff");
     const [qrCode, setQrCode] = useState("");
 
-
+    //Retrieving Folders from firestore
     useEffect(() => {
         return db.collection(props.user).onSnapshot((snapshot) => {
             const postData = [];
@@ -45,6 +45,7 @@ export function Overview({route, navigation}){
         Linking.openURL(`http://api.qrserver.com/v1/create-qr-code/?data=ordner.${event.value}!&size=${size}x${size}&bgcolor=${bgColor}`);
     }
 
+    //Navigating to ContentsPage of selected Folder
     function onPress(item){
         navigation.navigate('Inhalt', {
             folder: item.value,
@@ -54,7 +55,7 @@ export function Overview({route, navigation}){
         return
     }
 
-
+    //Ads Folder with title to firestore
     function submitFolder(){
         console.log(props.user, newFolder);
         db.collection(props.user).add({

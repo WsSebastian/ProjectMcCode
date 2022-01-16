@@ -17,7 +17,7 @@ export function AddEntry({route, navigation}) {
         label: props.title,
         value: props.id
     });
-
+//Retrieving all folders from firestore
     useEffect(() => {
         console.log(route.params, props.user);
         return db.collection(props.user).onSnapshot((snapshot) => {
@@ -35,10 +35,8 @@ export function AddEntry({route, navigation}) {
         });
     }, []);
 
-
-
+//Upload Entry into firestore
     function saveEntry() {
-
         console.log(title, description, category, folder)
         //event.preventDefault();
         db.collection(props.user).doc(folder).collection("inhalt").add({
@@ -47,6 +45,8 @@ export function AddEntry({route, navigation}) {
         }).then(() => {
             console.log('Item added!');
         })
+        setTitle("");
+        setDescription("");
     }
     return(
         <View style={styles.container}>
@@ -75,7 +75,6 @@ export function AddEntry({route, navigation}) {
                 </Text>
                 <TextInput style={styles.textInput} placeholder="Beschreibung" onChangeText={text=>setDescription(text)}  keyboardType='default'/>
                 <Text>{'\n'}</Text>
-
                 <Pressable style={styles.button} onPress={saveEntry}>
                     <Text style={styles.textSmall}>Hinzufügen</Text>
                 </Pressable>

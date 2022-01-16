@@ -16,8 +16,9 @@ import {EditEntry} from "./Components/AddEntry/EditEntry";
 import {useEffect, useState} from "react";
 import {getAuth, onAuthStateChanged, signInAnonymously} from "firebase/auth";
 
-const Tab = createBottomTabNavigator();
 const auth = getAuth();
+
+//Anonymous sign in into firebase
 signInAnonymously(auth)
     .then(() => {
     })
@@ -34,7 +35,9 @@ export default function App() {
     const OverviewStack = createStackNavigator();
     const ScannerStack = createStackNavigator();
     const EntryStack = createStackNavigator();
+    const Tab = createBottomTabNavigator();
 
+    //Retrieving UserID when Authorisation status changes
     onAuthStateChanged(auth, (user) => {
         if (user) {
             const uid = user.uid;
@@ -43,7 +46,7 @@ export default function App() {
         }
     });
 
-
+    //Stackscreen for Scanner for Navigation
     function ScannerStackScreen(){
 
         return(
@@ -64,6 +67,7 @@ export default function App() {
         )
     }
 
+    //StackScreen for Overview for Navigation
     function OverviewStackScreen(){
 
       return(
@@ -84,7 +88,9 @@ export default function App() {
       );
     }
 
+    //StackScreen for Adding Entries
     function EntryStackScreen(){
+
         return(
             <EntryStack.Navigator>
                 <EntryStack.Screen name={"Eintrag"} initialParams={{user: user}} component={AddEntry} options={{

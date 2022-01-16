@@ -15,8 +15,8 @@ export function EditEntry({route, navigation}) {
         value: props.id
     });
 
+    //Saving edited Entry to firebase
     function saveEntry() {
-
         db.collection(props.user).doc(props.folder).collection("inhalt").doc(props.content.id).set({
             title: title,
             description: description
@@ -26,6 +26,7 @@ export function EditEntry({route, navigation}) {
         navigation.goBack();
     }
 
+    //deleting Entry from firestore
     function deleteEntry(){
         db.collection(props.user).doc(props.folder).collection('inhalt').doc(props.content.id).delete().then(() => {
             console.log('Folder deleted!');

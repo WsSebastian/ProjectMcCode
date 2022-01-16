@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button, Vibration } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import {styles} from "../../App";
+import db from "../Database/firebase.config";
 
 export function Scanner({route, navigation}) {
 
     const props = route.params;
-
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
-    const [text, setText] = useState('Suche QR-Code')
+    const [text, setText] = useState('Camera access denied!')
+    const [title, setTitle] = useState('Ordner')
 
+    //Requesting Permission to use Camera
     useEffect(() => {
         (async () => {
             const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -18,23 +20,31 @@ export function Scanner({route, navigation}) {
         })();
     }, []);
 
+    //Opening Page storage belonging to scanned QR-Code
     const handleScannedCode = ({ type, data }) => {
         setScanned(true);
-        //wenn unser QR-Code
+        //If qr-Code from our app is scanned
+
         if(data.includes("ordner.")){
-            //Aufrufen von entsprechender ContentsPage
+
+            //Navigating to ContentsPage
             const param = (data.split(".").pop());
             const str = param.substring(0, param.length - 1);
             Vibration.vibrate();
+            console.log(title);
             navigation.navigate('Inhalt', {
-                folder: str
-            })
-
+                folder: str,
+                title: title
+            });
+            return
         }
-    };
+    }
+
+    //Check smartphone permissions
     if (hasPermission === false) {
         return <Text>Camera: Access denied!</Text>;
     }
+
     return (
         <View style={styles.containerScanner}>
             <View style={styles.barcodebox}>

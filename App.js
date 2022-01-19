@@ -9,12 +9,14 @@ import { Overview } from "./Components/Overview/Overview";
 import { StartPage } from "./Components/StartPage/StartPage";
 
 import * as Icon from '@expo/vector-icons';
-import {ColorPropType, StyleSheet, View, Text} from 'react-native';
+import {ColorPropType, StyleSheet, View, Text, LogBox} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {Impressum} from "./Components/Impressum/Impressum";
 import {EditEntry} from "./Components/AddEntry/EditEntry";
 import {useEffect, useState} from "react";
 import {getAuth, onAuthStateChanged, signInAnonymously} from "firebase/auth";
+
+LogBox.ignoreAllLogs(true);
 
 const auth = getAuth();
 

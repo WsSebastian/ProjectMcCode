@@ -44,8 +44,7 @@ export function AddEntry({route, navigation}) {
         }).then(() => {
             console.log('Item added!');
         })
-        setTitle("");
-        setDescription("");
+        alert("Gegenstand wurde hinzugefügt");
     }
 
     // Create form for the user

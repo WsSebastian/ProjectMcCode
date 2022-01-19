@@ -9,7 +9,7 @@ export function Scanner({route, navigation}) {
     const props = route.params;
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
-    const [text, setText] = useState('Camera access denied!')
+    const [text, setText] = useState('Scanning')
     const [title, setTitle] = useState('Ordner')
 
     //Requesting Permission to use Camera
